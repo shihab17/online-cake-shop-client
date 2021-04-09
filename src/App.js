@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Admin from './Components/Admin/Admin';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Cake from './Components/Cake/Cake';
 function App() {
   return (
     <Router>
@@ -20,7 +21,7 @@ function App() {
             <Link to="/admin">Admin</Link>
           </li>
           <li>
-            <Link to="/users">Users</Link>
+            <Link to="/cake">cake</Link>
           </li>
         </ul>
       </nav>
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path='/admin'>
           <Admin></Admin>
+        </Route>
+        <Route path='/cake'>
+          <Cake></Cake>
         </Route>
       </Switch>
     </Router>

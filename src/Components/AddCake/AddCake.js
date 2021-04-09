@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Cake from '../Cake/Cake';
 
 const AddCake = () => {
     const { register, handleSubmit } = useForm();
@@ -39,6 +40,7 @@ const AddCake = () => {
                     <input className=" btn btn-lg btn-info m-3" type="submit" />
                 </div>
             </form>
+            <Cake></Cake>
         </div>
     );
 };
