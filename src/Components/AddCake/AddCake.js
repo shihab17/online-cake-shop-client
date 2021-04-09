@@ -9,7 +9,7 @@ const AddCake = () => {
             cakeName: data.cakeName,
             cakePrice: data.cakePrice
         }
-        fetch('http://localhost:5055/addCake', {
+        fetch('https://online-cake-shop.herokuapp.com/addCake', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

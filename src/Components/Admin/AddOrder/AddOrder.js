@@ -3,6 +3,11 @@ import { useForm } from 'react-hook-form';
 
 const AddOrder = () => {
     // const { register, handleSubmit } = useForm();
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + ' ' + time;
+
     const [order, setOrder] = useState({
         customerName: '',
         customerPhoneNumber: '',
@@ -10,7 +15,8 @@ const AddOrder = () => {
         cakeName: '',
         weight: 0,
         totalCost: 0,
-        discount: 0
+        discount: 0,
+        dateTime:''
 
     })
     const [cake, setCake] = useState([]);
@@ -18,7 +24,7 @@ const AddOrder = () => {
     const [total, setTotal] = useState(0)
     console.log("Order", order)
     useEffect(() => {
-        fetch(`http://localhost:5055/cakes`)
+        fetch(`https://online-cake-shop.herokuapp.com/cakes`)
             .then(res => res.json())
             .then(data => setCake(data))
     }, [])
@@ -26,7 +32,7 @@ const AddOrder = () => {
     const handleSelect = () => {
         console.log("clicked")
         const orderCakeId = document.getElementById('orderCakeName').value;
-        fetch(`http://localhost:5055/cakes/${orderCakeId}`)
+        fetch(`https://online-cake-shop.herokuapp.com/cakes/${orderCakeId}`)
             .then(res => res.json())
             .then(data => setPrice(data[0].cakePrice))
 
@@ -34,8 +40,8 @@ const AddOrder = () => {
     const handleWeight = event => {
         const cakWeight = event.target.value;
         let discount = document.getElementById('discount').value;
-        if(discount ===''){
-            discount=0
+        if (discount === '') {
+            discount = 0
         }
         let sum = price * parseFloat(cakWeight);
         document.getElementById('totalAmount').value = sum - parseFloat(discount);
@@ -59,34 +65,47 @@ const AddOrder = () => {
             cakeName: document.getElementById('orderCakeName').value,
             weight: document.getElementById('cakeWeight').value,
             totalCost: document.getElementById('totalAmount').value,
-            discount: document.getElementById('discount').value
+            discount: document.getElementById('discount').value,
+            dateTime: dateTime
         })
-        fetch('http://localhost:5055/addOrder', {
+        const orderData = {
+            customerName: document.getElementById('customerName').value,
+            customerPhoneNumber: document.getElementById('customerPhoneNumber').value,
+            deliveryDAte: document.getElementById('deliveryDate').value,
+            cakeName: document.getElementById('orderCakeName').value,
+            weight: document.getElementById('cakeWeight').value,
+            totalCost: document.getElementById('totalAmount').value,
+            discount: document.getElementById('discount').value,
+            dateTime: dateTime
+        }
+        fetch('https://online-cake-shop.herokuapp.com/addOrder', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(order)
+            body: JSON.stringify(orderData)
         })
-        .then(res => {
-            document.getElementById('customerName').value="";
-            document.getElementById('customerPhoneNumber').value="";
-            document.getElementById('deliveryDate').value='';
-            document.getElementById('orderCakeName').value='';
-            document.getElementById('cakeWeight').value='';
-            document.getElementById('totalAmount').value='';
-            document.getElementById('discount').value='';
-            setOrder({
-                customerName: '',
-                customerPhoneNumber: '',
-                deliveryDAte: '',
-                cakeName: '',
-                weight: 0,
-                totalCost: 0,
-                discount: 0
+            .then(res => {
+                document.getElementById('customerName').value = "";
+                document.getElementById('customerPhoneNumber').value = "";
+                document.getElementById('deliveryDate').value = '';
+                document.getElementById('orderCakeName').value = '';
+                document.getElementById('cakeWeight').value = '';
+                document.getElementById('totalAmount').value = '';
+                document.getElementById('discount').value = '';
+                // setOrder({
+                //     customerName: '',
+                //     customerPhoneNumber: '',
+                //     deliveryDAte: '',
+                //     cakeName: '',
+                //     weight: 0,
+                //     totalCost: 0,
+                //     discount: 0,
+                //     dateTime:''
+                // })
+                console.log('server response', res)
+                console.log(order)
             })
-            console.log('server response', res)
-        })
         e.preventDefault();
     }
     return (

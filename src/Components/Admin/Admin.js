@@ -1,5 +1,6 @@
 import React from 'react';
 import AddCake from '../AddCake/AddCake';
+import Order from '../Order/Order';
 import AddOrder from './AddOrder/AddOrder';
 
 const Admin = () => {
@@ -18,7 +19,8 @@ const Admin = () => {
             </ul>
             <div className="tab-content" id="pills-tabContent">
                 <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
+                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, provident minima sit iste laudantium quos ab vitae cum impedit, doloremque voluptatem labore cupiditate quam ipsa delectus doloribus obcaecati ipsam id.</p>
+                    <Order></Order>
                 </div>
                 <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet cum sunt dolorem velit optio voluptatum vero molestias quis ipsa corrupti. Sequi laboriosam optio assumenda rerum perspiciatis sit quidem quasi itaque.</p>
