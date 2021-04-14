@@ -10,9 +10,15 @@ const Cake = () => {
     }, []);
     const handleEdit = cakeId => {
         console.log("clicked",cakeId)
+      
     }
     const handleDelete = cakeId => {
         console.log("deleted",cakeId)
+        fetch(`https://online-cake-shop.herokuapp.com/deleteCake/${cakeId}`,{
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(result => console.log(result))
     }
     return (
         <div className="row m-5">
